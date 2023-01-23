@@ -29,6 +29,11 @@ typedef double db;
 #define repj(a, b) for(ll j = a; j < b; j++)
 
 
+#define nwline \n
+
+
+
+
 """
 
 
@@ -56,12 +61,16 @@ args = sys.argv[1:]
 
 
 comp_flag = False
+cursed_cpp_flag = False
 
 
 if '-c' in args:
 	comp_flag = True
 	args.remove('-c')
 
+if '-ccpp' in args:
+	cursed_cpp_flag = True
+	args.remove('-ccpp')
 
 
 
@@ -71,7 +80,10 @@ if len(args) == 1:
 	with open( args[0] , 'r' ) as f:
 		with open( f'cpcomp_{args[0]}' , 'w' ) as f2:
 
-			f2.write( template_part1 + cursed_cpp.uncurse( f.read() ) + template_part2 )
+			if cursed_cpp_flag:
+				f2.write( template_part1 + cursed_cpp.uncurse( f.read() ) + template_part2 )
+			else:
+				f2.write( template_part1 + f.read() + template_part2 )
 
 
 	if comp_flag:
@@ -83,7 +95,10 @@ elif len(args) == 2:
 	with open( args[0] , 'r' ) as f:
 		with open( args[1], 'w' ) as f2:
 
-			f2.write( template_part1 + cursed_cpp.uncurse( f.read() ) + template_part2 )
+			if cursed_cpp_flag:
+				f2.write( template_part1 + cursed_cpp.uncurse( f.read() ) + template_part2 )
+			else:
+				f2.write( template_part1 + f.read() + template_part2 )
 
 
 	if comp_flag:
@@ -95,7 +110,14 @@ elif len(args) == 3:
 	with open( args[0] , 'r' ) as f:
 		with open( args[1], 'w' ) as f2:
 
-			f2.write( template_part1 + cursed_cpp.uncurse( f.read() ) + template_part2 )
+			if cursed_cpp_flag:
+				f2.write( template_part1 + cursed_cpp.uncurse( f.read() ) + template_part2 )
+			else:
+				f2.write( template_part1 + f.read() + template_part2 )
 
 	
 	os.system(f'g++ "{args[1]}" -o {args[2]}')
+
+else:
+
+	print('\u001b[31m' + '\n[!] Invalid number of arguments [!]' + '\u001b[0m')
