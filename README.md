@@ -1,2 +1,2 @@
-# CPComp
-A quick compilation script that wraps code around templates
+# CPUtils
+A few scripts to use for competitive programming
