@@ -25,8 +25,11 @@ if len(args) == 1:
 
 	print('-'*os.get_terminal_size()[0])
 
-	
-	os.system(args[0] + ' < __input_stream.txt')
+	if platform.system() == 'Windows':
+		os.system(args[0] + ' < __input_stream.txt')
+	else:
+		os.system('__input_stream.txt | ' + args[0])
+
 
 	os.remove('__input_stream.txt')
 
