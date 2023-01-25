@@ -22,16 +22,14 @@ if len(args) == 1:
 	with open('__input_stream.txt', 'w') as f:
 		f.write(input_stream)
 
-	print('\r' + '-'*os.get_terminal_size()[0])
 
-	if platform.system() == 'Windows':
-		os.system('__input_stream.txt > ' + args[0])
+	print('-'*os.get_terminal_size()[0])
 
-	elif platform.system() in ('Darwin', 'Linux'):
-		os.system('__input_stream.txt | ' + args[0])
-
+	
+	os.system(args[0] + ' < __input_stream.txt')
 
 	os.remove('__input_stream.txt')
+
 
 else:
 
