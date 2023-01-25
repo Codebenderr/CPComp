@@ -52,11 +52,8 @@ int main() {
 """
 
 
-print('')
-
 
 args = sys.argv[1:]
-
 
 
 
@@ -71,7 +68,6 @@ if '-c' in args:
 if '-ccpp' in args:
 	cursed_cpp_flag = True
 	args.remove('-ccpp')
-
 
 
 
@@ -103,20 +99,6 @@ elif len(args) == 2:
 
 	if comp_flag:
 		os.system(f'g++ "{args[1]}" -o bin')
-
-
-elif len(args) == 3:
-
-	with open( args[0] , 'r' ) as f:
-		with open( args[1], 'w' ) as f2:
-
-			if cursed_cpp_flag:
-				f2.write( template_part1 + cursed_cpp.uncurse( f.read() ) + template_part2 )
-			else:
-				f2.write( template_part1 + f.read() + template_part2 )
-
-	
-	os.system(f'g++ "{args[1]}" -o {args[2]}')
 
 else:
 

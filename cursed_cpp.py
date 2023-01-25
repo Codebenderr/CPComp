@@ -28,6 +28,9 @@ def semicolonify(txt):
 		elif i != len(lines)-1 and lines[i+1].strip() == '{':
 			final.append(line)
 
+		elif line.rstrip().endswith(':'):
+			final.append(line)
+
 		else:
 
 			if line.rstrip().endswith(';'):
