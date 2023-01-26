@@ -33,7 +33,7 @@ if platform.system() == 'Windows':
 	os.system(args.executable + ' < __input_stream.txt')
 else:
 
-	os.system('__input_stream.txt | ' + args.executable)
+	os.system('__input_stream.txt | ./' + args.executable)
 
 
 os.remove('__input_stream.txt')

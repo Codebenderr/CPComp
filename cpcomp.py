@@ -20,18 +20,18 @@ template_part1 = """
 using namespace std;
 
 typedef long long int ll;
+typedef long long int lint;
 typedef long double ld;
 typedef double db;
 
 
-#define loop(a) for (ll __temp_looping_var = 0; __temp_looping_var < a; __temp_looping_var++)
+#define rep(a) for(ll __temp_looping_var = 0; __temp_looping_var < a; __temp_looping_var++)
 #define repi(a, b) for(ll i = a; i < b; i++)
 #define repk(a, b) for(ll k = a; k < b; k++)
 #define repj(a, b) for(ll j = a; j < b; j++)
 
 
-#define nwline \n
-
+#define nwline \\n
 
 
 
@@ -39,6 +39,8 @@ typedef double db;
 
 
 template_part2 = """
+
+
 int main() {
 
 	ios_base::sync_with_stdio(false);
@@ -49,8 +51,7 @@ int main() {
 	cout << flush;
 
 	return 0;
-}
-"""
+}"""
 
 
 
