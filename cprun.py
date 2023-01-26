@@ -1,39 +1,39 @@
-import sys
 import os
 import platform
-
-args = sys.argv[1:]
-
+import argparse
 
 
-if len(args) == 1:
-
-	input_stream = ''
-
-	while True:
-		inp = input()
-
-		if inp == 'stfu':
-			break
-		else:
-			input_stream += '\n' + inp
+parser = argparse.ArgumentParser()
+parser.add_argument('executable', type=str, help = 'the filename of the executable which will be executed')
+args = parser.parse_args()
 
 
-	with open('__input_stream.txt', 'w') as f:
-		f.write(input_stream)
+input_stream = ''
 
 
-	print('-'*os.get_terminal_size()[0])
+while True:
+	inp = input()
 
-	if platform.system() == 'Windows':
-		os.system(args[0] + ' < __input_stream.txt')
+	if inp == 'stfu':
+		break
 	else:
-		os.system('__input_stream.txt | ' + args[0])
+		input_stream += inp + '\n'
 
 
-	os.remove('__input_stream.txt')
+
+with open('__input_stream.txt', 'w') as f:
+	f.write(input_stream)
 
 
+print('-'*os.get_terminal_size()[0])
+
+
+if platform.system() == 'Windows':
+
+	os.system(args.executable + ' < __input_stream.txt')
 else:
 
-	print('\u001b[31m' + '\n[!] Invalid number of arguments [!]' + '\u001b[0m')
+	os.system('__input_stream.txt | ' + args.executable)
+
+
+os.remove('__input_stream.txt')

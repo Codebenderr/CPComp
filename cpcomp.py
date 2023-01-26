@@ -1,5 +1,6 @@
 import sys
 import os
+import argparse
 import cursed_cpp
 
 
@@ -53,53 +54,27 @@ int main() {
 
 
 
-args = sys.argv[1:]
+parser = argparse.ArgumentParser()
 
 
-
-comp_flag = False
-cursed_cpp_flag = False
+parser.add_argument('input_file', help = 'The name of the input file')
 
 
-if '-c' in args:
-	comp_flag = True
-	args.remove('-c')
+parser.add_argument('-c', '--compile', action='store_true', help = 'use this if the output file should be compiled with g++ afterwards')
+parser.add_argument('-ccpp', '--cursed_cpp', action = 'store_true', help = 'use this if the input file is a "Cursed C++" file')
 
-if '-ccpp' in args:
-	cursed_cpp_flag = True
-	args.remove('-ccpp')
+args = parser.parse_args()
 
 
+with open(args.input_file, 'r') as f:
+	with open(f'cpcomp_{args.input_file}', 'w') as f2:
 
-if len(args) == 1:
-
-	with open( args[0] , 'r' ) as f:
-		with open( f'cpcomp_{args[0]}' , 'w' ) as f2:
-
-			if cursed_cpp_flag:
-				f2.write( template_part1 + cursed_cpp.uncurse( f.read() ) + template_part2 )
-			else:
-				f2.write( template_part1 + f.read() + template_part2 )
+		if args.cursed_cpp:
+			f2.write( template_part1 + cursed_cpp.uncurse( f.read() ) + template_part2 )
+		else:
+			f2.write( template_part1 + f.read() + template_part2 )
 
 
-	if comp_flag:
-		os.system(f'g++ "cpcomp_{args[0]}" -o bin')
-
-
-elif len(args) == 2:
-
-	with open( args[0] , 'r' ) as f:
-		with open( args[1], 'w' ) as f2:
-
-			if cursed_cpp_flag:
-				f2.write( template_part1 + cursed_cpp.uncurse( f.read() ) + template_part2 )
-			else:
-				f2.write( template_part1 + f.read() + template_part2 )
-
-
-	if comp_flag:
-		os.system(f'g++ "{args[1]}" -o bin')
-
-else:
-
-	print('\u001b[31m' + '\n[!] Invalid number of arguments [!]' + '\u001b[0m')
+if args.compile:
+	tmp = args.input_file.split('.')[0]
+	os.system(f'g++ cpcomp_{args.input_file} -o cpcomp_{tmp}')
